@@ -20,12 +20,13 @@ function App({ signOut }) {
   }, [setNotes])
 
   const handleCreateNote = useCallback(async () => {
-    await client.graphql({
+    const response = await client.graphql({
       query: createNote,
       variables: { input: { text: window.prompt("New note") } },
       authMode: 'AMAZON_COGNITO_USER_POOLS'
     })
     fetchNotes()
+    console.log(response)
   }, [fetchNotes])
 
   const handleDeleteNote = useCallback(async (id) => {
